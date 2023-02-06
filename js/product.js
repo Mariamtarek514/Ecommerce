@@ -1,7 +1,4 @@
-let chartArray = [];
-if (localStorage.getItem("chart")) {
-    chartArray = JSON.parse(localStorage.getItem("chart"));
-}
+
 // array of favorite item
 let favoriteProduct=[];
 // to updat array with item in localstorage
@@ -9,6 +6,10 @@ if(localStorage.getItem("favorite")){
     favoriteProduct=JSON.parse(localStorage.getItem("favorite"))
 }
 
+let chartArray = [];
+if (localStorage.getItem("chart")) {
+    chartArray = JSON.parse(localStorage.getItem("chart"));
+}
 function creatProductCard(data) {
     let card = document.createElement("div");
     card.classList = "card";
@@ -25,7 +26,7 @@ function creatProductCard(data) {
         icons.classList = "icon_container";
         // saved item
         let favoriteProdcut = document.createElement("i");
-        favoriteProdcut.classList = `fa-regular fa-heart addToFavorite ${data.id}`;
+        favoriteProdcut.classList = `fa-regular fa-heart RelatedFavorite ${data.id}`;
         favoriteProdcut.setAttribute("data-favorite", data.id);
         favoriteProdcut.setAttribute("id", data.id);
         imageContainer.append(favoriteProdcut);
@@ -78,7 +79,7 @@ function creatDescriptionContent(data) {
     // descriptionContainer.append(productBrand);
     // saved item
     let favoriteProdcut=document.createElement("i")
-    favoriteProdcut.classList=`fa-regular fa-heart addToFavorite ${data.id}`
+    favoriteProdcut.classList=`fa-regular fa-heart showAddToFavorite ${data.id}`
     favoriteProdcut.setAttribute("data-favorite",data.id)
     favoriteProdcut.setAttribute("id",data.id)
     // decription_header div
@@ -143,9 +144,11 @@ function productImage() {
             productGalleryContainer.src = datas.thumbnail;
             creatDescriptionContent(datas);
             relatedProduct(datas.category, datas.id);
-            let favoriteProduct=document.querySelector(".addToFavorite")
+            let favoriteProduct=document.querySelector(".showAddToFavorite");
+            
             loadData(favoriteProduct)
             favoriteProduct.addEventListener("click",()=>{
+               
                 addFavoriteProductToLocalStorage(favoriteProduct.dataset.favorite,favoriteProduct)
             })
         let addProductToCart=document.querySelector(".addingProduct")
@@ -164,7 +167,7 @@ function productImage() {
                     document.querySelector(".popup_regiser").classList.remove("active");
     
                 }
-            console.log(id,price,qunatity)
+        
         }
         }
     };
@@ -214,8 +217,9 @@ function relatedProduct(category, id) {
                         });
                     });
                 //    add to favorite
-                let favorite = document.querySelectorAll(".addToFavorite");
-                favorite.forEach((element) => {
+                let RelatedFavorite = document.querySelectorAll(".RelatedFavorite");
+                RelatedFavorite.forEach((element) => {
+                    
                     loadData(element)
                     element.onclick = function () {
                         addFavoriteProductToLocalStorage(element.id, element);
@@ -272,47 +276,52 @@ function closeRegisterPopup() {
 }
 
 // add favorite item to localstorage
-function addFavoriteProductToLocalStorage(id, icon) {
-    let clicked = 0;
-    let favorite = {
-        id: id,
-        colored: 1,
-    };
-    let local = JSON.parse(localStorage.getItem("favorite"));
-    if (localStorage.getItem("favorite")) {
-        local.forEach((item) => {
-            if (item.id == id) {
-                clicked = item.colored;
-            }
-        });
+function addFavoriteProductToLocalStorage(id,icon){
+    let clicked=0;
+    let favorite={
+        id:id,
+        colored:1,
     }
-    if (clicked == 0 || clicked == 2) {
+    let local=JSON.parse(localStorage.getItem("favorite"));
+    if(localStorage.getItem("favorite")){
+        local.forEach((item)=>{
+            if(item.id == id){
+                clicked=item.colored;
+            }
+        })
+    }
+    if(clicked==0||clicked==2){
         // gonna work when product clicked for first time
-        if (clicked == 0) {
+        if(clicked ==0){
             favoriteProduct.push(favorite);
-        } else {
-            favoriteProduct.forEach((element) => {
-                if (element.id == id) {
-                    element.colored = 1;
+        }else{
+            favoriteProduct.forEach((element)=>{
+                if(element.id==id){
+                    element.colored=1
                 }
-            });
+            })
         }
-        icon.classList = "fa-solid fa-heart addToFavorite active";
-    } else {
-        icon.classList = "fa-regular fa-heart addToFavorite";
-        favoriteProduct.forEach((element) => {
-            if (element.id == id) {
-                element.colored = 2;
-                deleteItemFromlocal(element.id);
+        icon.classList="fa-solid fa-heart addToFavorite active"
+    }else{
+        icon.classList="fa-regular fa-heart addToFavorite";
+        favoriteProduct.forEach((element)=>{
+            if(element.id==id){
+                element.colored=2;
+                deleteItemFromlocal(element.id)
             }
-        });
+           
+        })
     }
-    localStorage.setItem("favorite", JSON.stringify(favoriteProduct));
+    
+    localStorage.setItem("favorite",JSON.stringify(favoriteProduct));
 }
 // remove product from favorite
-function deleteItemFromlocal(id) {
-    favoriteProduct = favoriteProduct.filter((product) => product.id != id);
+function deleteItemFromlocal(id){
+
+    favoriteProduct=favoriteProduct.filter((product)=>product.id != id)
+    
 }
+
 // load favorite icon from local storage
 function loadData(icon) {
     if (localStorage.getItem("favorite")) {
@@ -325,7 +334,7 @@ function loadData(icon) {
     }
 }
 // carts numbers
-function cartsNumbers(product){
+function cartsNumbers(){
     let productNumbers = localStorage.getItem('chart')
     if (productNumbers){
         document.querySelector('.cart span').textContent = JSON.parse(productNumbers).length;

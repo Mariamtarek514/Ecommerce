@@ -274,13 +274,24 @@
 }
 @media screen and (max-width:990px) {
     #hero{
-        background: url("../images/hero-phone.jpg");
+        background: #f4f4f4;
         display: flex;
     justify-content: center;
     align-items: center;
     color: #FFF;
+    text-align: center;
     }
     
+}
+@media screen and (max-width:580px) {
+  #hero h1{
+    font-size: 40px;
+  }
+}
+@media screen and (max-width:490px) {
+  #hero h1{
+    font-size: 30px;
+  }
 }
 @media  screen and (max-width:931px) {
     .product .container{

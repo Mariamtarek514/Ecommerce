@@ -143,11 +143,10 @@
 }
 
 #hero {
-    background: url("../images/hero.jpg");
+    background: url("../images/cyber-monday-retail-sales.jpg");
     height: 90vh;
     background-position: center;
     background-size: cover;
-    padding: 0 80px;
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -715,7 +714,8 @@ footer a:hover {
     row-gap: 30px;
     position: relative;
 }
-.product .addToFavorite{
+.product .addToFavorite,
+.product .showAddToFavorite{
     font-size: 20px;
     cursor: pointer;
     color: var(--main-color);
@@ -735,7 +735,7 @@ footer a:hover {
     text-transform: capitalize;
 }
 .product .description .product_title{
-    font-size: 34px;
+    font-size: 29px;
     
     text-transform: capitalize;
 

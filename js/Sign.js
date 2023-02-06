@@ -12,7 +12,7 @@ function generateError(place,text){
 }
 function userName(place) {
   var Nname = document.getElementById("User");
-  var userRegExp = /(^[a-z]{3,}(\s[a-z]{3,})+)+$/
+  var userRegExp = /(^[a-zA-Z]{3,}(\s[a-zA-z]{3,})+)+$/
   var Nname = document.getElementById("User").value;
   var reName = userRegExp.test(Nname)
   if (reName == true){
@@ -42,7 +42,7 @@ function eMaill(mEmaill,place,input) {
     let text="- You enter a wrong email your email must be like test@gmail.com";
     generateError(place,text)
     place.classList="error active";
-    console.log(place.classList,place)
+    
     input.style.cssText=" border-bottom-color: #842029;"
     return false;
   }
