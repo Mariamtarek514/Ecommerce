@@ -125,7 +125,7 @@ function userInformation(){
             userName.innerHTML=information.userName;
             email.innerHTML=information.email;
         })
-        console.log("f")
+     
     }
 }
 userInformation();

@@ -292,6 +292,11 @@
   #hero h1{
     font-size: 30px;
   }
+  /* chart */
+  .chart_container .empty h2{
+    font-size: 21px;
+
+  }
 }
 @media  screen and (max-width:931px) {
     .product .container{

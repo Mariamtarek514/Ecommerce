@@ -999,6 +999,8 @@ color: var(--text-light);
     flex-direction: column;
     row-gap: 30px;
     align-items: center;
+    width: 500px;
+    max-width: 100%;
 }
 
 .chart_container .empty a{
